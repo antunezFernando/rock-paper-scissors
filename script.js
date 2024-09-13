@@ -15,20 +15,49 @@ function getComputerChoice() {
     }
 }
 
-function getResult(playerChoice, computerChoice) {
+function getPlayerChoice() {
+    let playerChoice = "";
+
+    let keepGoing = true;
+    while(keepGoing) {
+        let rawPlayerChoice = prompt("What is your choice?", "")
+
+        playerChoice = normalizeString(rawPlayerChoice)
+        if(playerChoice !== rock && playerChoice !== paper &&
+            playerChoice !== scissors) {
+                alert("The possible choices are Rock, Paper or Scissors")
+            } else {
+                keepGoing = false;
+            }
+    }
+
+    return playerChoice;
+}
+
+function getResult(rawPlayerChoice, computerChoice) {
+    let playerChoice = normalizeString(rawPlayerChoice)
     if(playerChoice === computerChoice) {
-        return "It's a tie";
+        return `${playerChoice} against ${computerChoice}! It's a tie...`;
     }
 
     if(playerChoice === rock && computerChoice === scissors ||
         playerChoice === scissors && computerChoice === paper ||
         playerChoice === paper && computerChoice === rock) {
-            return "You've won"
+            return `${playerChoice} against ${computerChoice}! You've won!`;
     }
 
-    return "You've lost"
+    return `${playerChoice} against ${computerChoice}! You've lost :(`;
 }
 
-let playerChoice = prompt("What is your choice?")
-let computerChoice = getComputerChoice()
-console.log(getResult(playerChoice, computerChoice))
+function normalizeString(string) {
+    if(string !== "") {
+        let firstLetter = string[0].toUpperCase();
+        let rest = string.slice(1);
+        return firstLetter + rest;
+    }
+
+    return string;
+}
+
+alert(getResult(getPlayerChoice(), getComputerChoice()))
+
