@@ -1,3 +1,36 @@
 body {
     margin: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    width: auto;
+    height: 100px;
+    background-color: rgb(173, 171, 171);
+}
+
+.header-logo {
+    display: flex;
+    background-color: white;
+    border-radius: 100%;
+    flex-shrink: 1;
+}
+
+#logo {
+    border: 2px solid black;
+    border-radius: 100%;
+    flex-shrink: 1;
+}
+
+.header-title {
+    display: flex;
+    gap: 1vw;
+    flex-shrink: 1;
+}
+
+#title {
+    flex-shrink: 1;
 }
