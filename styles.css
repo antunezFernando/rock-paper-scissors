@@ -9,6 +9,7 @@ body {
     padding: 15px 25px;
     width: auto;
     height: 100px;
+    gap: 20px;
     background-color: rgb(173, 171, 171);
 }
 
@@ -29,8 +30,24 @@ body {
     display: flex;
     gap: 1vw;
     flex-shrink: 1;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-#title {
-    flex-shrink: 1;
+#title-rock,
+#title-paper,
+#title-scissors {
+    font-size: 4vw;
+}
+
+#title-rock {
+    font-family: 'Sanguis Noctis', sans-serif;
+}
+
+#title-paper {
+    font-family: 'Rolsting Script', sans-serif;
+}
+
+#title-scissors {
+    font-family: 'Moby', sans-serif;
 }
