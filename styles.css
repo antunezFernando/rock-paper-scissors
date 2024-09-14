@@ -79,6 +79,10 @@ body {
     gap: 15px;
 }
 
+.selected-button {
+    background-color: cadetblue;
+}
+
 .confirm-container {
     display: flex;
     width: 100%;
