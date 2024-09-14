@@ -12,22 +12,14 @@ let scissors = {
 }
 
 let rockButton = document.getElementById("rock-button")
-
 let paperButton = document.getElementById("paper-button")
-
 let scissorsButton = document.getElementById("scissors-button")
-
-let playerChoice = null
-let computerChoice = null
-
 rockButton.onclick = () => {
     handleChoiceButtonClick(rockButton)
 }
-
 paperButton.onclick = () => {
     handleChoiceButtonClick(paperButton)
 }
-
 scissorsButton.onclick = () => {
     handleChoiceButtonClick(scissorsButton)
 }
@@ -74,32 +66,31 @@ function handleChoiceButtonClick(button) {
 }
 
 function handleConfirmButtonClick() {
-    playerChoice = getPlayerChoice()
-    computerChoice = getComputerChoice()
+    let playerChoice = getPlayerChoice()
+    if(playerChoice !== undefined) {
+        let computerChoice = getComputerChoice()
+        rockButton.disabled = paperButton.disabled = scissorsButton.disabled = confirmButton.disabled = true
+
+        document.getElementById("player").setAttribute("src", playerChoice.imagePath)
+        document.getElementById("computer").setAttribute("src", computerChoice.imagePath)
+
+        document.getElementById("player-choice-name").innerHTML = playerChoice.name
+        document.getElementById("computer-choice-name").innerHTML = computerChoice.name
+
+        result(playerChoice, computerChoice)
+    }
 }
 
-function getResult(rawPlayerChoice, computerChoice) {
-    let playerChoice = normalizeString(rawPlayerChoice)
-    if(playerChoice === computerChoice) {
-        return `${playerChoice} against ${computerChoice}! It's a tie...`;
+function result(playerChoice, computerChoice) {
+    if(playerChoice.name === computerChoice.name) {
+        
     }
 
-    if(playerChoice === rock && computerChoice === scissors ||
-        playerChoice === scissors && computerChoice === paper ||
-        playerChoice === paper && computerChoice === rock) {
-            return `${playerChoice} against ${computerChoice}! You've won!`;
+    if(playerChoice.name === rock && computerChoice.name === scissors ||
+        playerChoice.name === scissors && computerChoice.name === paper ||
+        playerChoice.name === paper && computerChoice.name === rock) {
+            
     }
 
-    return `${playerChoice} against ${computerChoice}! You've lost :(`;
+    
 }
-
-function normalizeString(string) {
-    if(string !== "") {
-        let firstLetter = string[0].toUpperCase()
-        let rest = string.slice(1)
-        return firstLetter + rest
-    }
-
-    return string
-}
-

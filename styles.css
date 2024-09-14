@@ -122,6 +122,10 @@ body {
     align-items: center;
 }
 
+.selection img {
+    border: 1px solid black;
+}
+
 .result-container {
     border: 1px solid black;
     border-radius: 5px;
