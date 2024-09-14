@@ -34,20 +34,29 @@
                 <button id="confirm-button">Confirm</button>
             </div>
         </div>
+
         <div class="result-div">
-            <div class="player-selection">
-                <span>Your selection:</span>
-                <img id="player" width="100px" height="auto" src="./images/paper.png">
-                <span>Your score: </span>
+            <div class="selection-container">
+                <div class="selection">
+                    <span>Your selection:</span>
+                    <img id="player" width="100px" height="auto" src="./images/paper.png">
+                    <span>Placeholder</span>
+                </div>
+                <div>VS</div>
+                <div class="selection">
+                    <span>CPU selection:</span>
+                    <img id="cpu" width="100px" height="auto" src="./images/paper.png">
+                    <span>Placeholder</span>
+                </div>
             </div>
-            <div class="result">
-                <span >VS</span>
-                <button>Play again</button>
-            </div>
-            <div class="cpu-selection">
-                <span>CPU selection:</span>
-                <img id="cpu" width="100px" height="auto" src="./images/paper.png">
-                <span>CPU score: </span>
+
+            <div class="result-container">
+                <div id="result">Placeholder</div>
+                <div class="scores">
+                    <div class="score-text">Player score: <span id="player-score"></span></div>
+                    <div class="score-text">Player score: <span id="cpu-score"></span></div>
+                </div>
+                <button id="play-again-button">Play again</button>
             </div>
         </div>
     </div>
