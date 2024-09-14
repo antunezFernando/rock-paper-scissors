@@ -17,6 +17,9 @@ let paperButton = document.getElementById("paper-button")
 
 let scissorsButton = document.getElementById("scissors-button")
 
+let playerChoice = null
+let computerChoice = null
+
 rockButton.onclick = () => {
     handleChoiceButtonClick(rockButton)
 }
@@ -29,37 +32,37 @@ scissorsButton.onclick = () => {
     handleChoiceButtonClick(scissorsButton)
 }
 
+let confirmButton = document.getElementById("confirm-button")
+confirmButton.onclick = handleConfirmButtonClick
+
 function getComputerChoice() {
-    let rand = Math.floor(Math.random() * 3);
+    let rand = Math.floor(Math.random() * 3)
 
     switch(rand) {
         case 0:
-            return rock;
+            return rock
         case 1:
-            return paper;
+            return paper
         default:
-            return scissors;
+            return scissors
     }
 }
 
 function getPlayerChoice() {
-    // let playerChoice = "";
-
-    // let keepGoing = true;
-    // while(keepGoing) {
-    //     let rawPlayerChoice = prompt("What is your choice?", "")
-
-    //     playerChoice = normalizeString(rawPlayerChoice)
-    //     if(playerChoice !== rock && playerChoice !== paper &&
-    //         playerChoice !== scissors) {
-    //             alert("The possible choices are Rock, Paper or Scissors")
-    //         } else {
-    //             keepGoing = false;
-    //         }
-    // }
-
-    // return playerChoice;
-
+    let choice = document.getElementsByClassName("selected-button")[0]
+    if(choice !== null && choice !== undefined) {
+        let choiceId = choice.getAttribute("id")
+        switch(choiceId) {
+            case "rock-button":
+                return rock
+            case "paper-button":
+                return paper
+            case "scissors-button":
+                return scissors
+        }
+    } else {
+        alert("Select one option")
+    }
 }
 
 function handleChoiceButtonClick(button) {
@@ -68,6 +71,11 @@ function handleChoiceButtonClick(button) {
     scissorsButton.classList.remove("selected-button")
 
     button.classList.add("selected-button")
+}
+
+function handleConfirmButtonClick() {
+    playerChoice = getPlayerChoice()
+    computerChoice = getComputerChoice()
 }
 
 function getResult(rawPlayerChoice, computerChoice) {
@@ -87,11 +95,11 @@ function getResult(rawPlayerChoice, computerChoice) {
 
 function normalizeString(string) {
     if(string !== "") {
-        let firstLetter = string[0].toUpperCase();
-        let rest = string.slice(1);
-        return firstLetter + rest;
+        let firstLetter = string[0].toUpperCase()
+        let rest = string.slice(1)
+        return firstLetter + rest
     }
 
-    return string;
+    return string
 }
 
