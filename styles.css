@@ -57,6 +57,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin-top: 100px;
+    gap: 50px;
 }
 
 .player-div {
@@ -87,4 +88,45 @@ body {
     font-size: 1.5vw;
     flex: 1;
     padding: 10px 0;
+}
+
+.result-div {
+    display: flex;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    width: 40vw;
+    justify-content: space-evenly;
+}
+
+.player-selection,
+.result,
+.cpu-selection {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 200px;
+    height: auto;
+}
+
+.player-selection,
+.cpu-selection {
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#player,
+#cpu {
+    align-self: center;
+}
+
+.result {
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result span {
+    margin-bottom: auto;
 }
