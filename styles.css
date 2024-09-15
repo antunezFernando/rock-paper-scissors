@@ -148,3 +148,16 @@ body {
     justify-content: space-between;
     width: 90%;
 }
+
+.footer {
+    height: 50px;
+    background-color: rgb(173, 171, 171);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+a {
+    text-decoration: none;
+}
