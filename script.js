@@ -27,6 +27,20 @@ scissorsButton.onclick = () => {
 let confirmButton = document.getElementById("confirm-button")
 confirmButton.onclick = handleConfirmButtonClick
 
+let playerScore = 0
+let computerScore = 0
+
+let resultElement = document.getElementById("result")
+result.innerHTML = ""
+let playerScoreElement = document.getElementById("player-score")
+let computerScoreElement = document.getElementById("computer-score")
+playerScoreElement.innerHTML = playerScore
+computerScoreElement.innerHTML = computerScore
+
+let playAgainButton = document.getElementById("play-again-button")
+playAgainButton.disabled = true
+playAgainButton.onclick = handlePlayAgainButton
+
 function getComputerChoice() {
     let rand = Math.floor(Math.random() * 3)
 
@@ -58,9 +72,7 @@ function getPlayerChoice() {
 }
 
 function handleChoiceButtonClick(button) {
-    rockButton.classList.remove("selected-button")
-    paperButton.classList.remove("selected-button")
-    scissorsButton.classList.remove("selected-button")
+    removeClassFromButtons()
 
     button.classList.add("selected-button")
 }
@@ -70,6 +82,7 @@ function handleConfirmButtonClick() {
     if(playerChoice !== undefined) {
         let computerChoice = getComputerChoice()
         rockButton.disabled = paperButton.disabled = scissorsButton.disabled = confirmButton.disabled = true
+        playAgainButton.disabled = false
 
         document.getElementById("player").setAttribute("src", playerChoice.imagePath)
         document.getElementById("computer").setAttribute("src", computerChoice.imagePath)
@@ -83,14 +96,37 @@ function handleConfirmButtonClick() {
 
 function result(playerChoice, computerChoice) {
     if(playerChoice.name === computerChoice.name) {
-        
+        resultElement.innerHTML = "It's a tie..."
+    } else if(playerChoice.name === rock.name && computerChoice.name === scissors.name ||
+        playerChoice.name === scissors.name && computerChoice.name === paper.name ||
+        playerChoice.name === paper.name && computerChoice.name === rock.name) {
+            resultElement.innerHTML = "You've won!"
+            playerScore++
+    } else {
+        resultElement.innerHTML = "You've lost :("
+        computerScore++
     }
 
-    if(playerChoice.name === rock && computerChoice.name === scissors ||
-        playerChoice.name === scissors && computerChoice.name === paper ||
-        playerChoice.name === paper && computerChoice.name === rock) {
-            
-    }
+    playerScoreElement.innerHTML = playerScore
+    computerScoreElement.innerHTML = computerScore
+}
 
-    
+function handlePlayAgainButton() {
+    removeClassFromButtons()
+    rockButton.disabled = paperButton.disabled = scissorsButton.disabled = confirmButton.disabled = false
+    playAgainButton.disabled = true
+
+    document.getElementById("player").setAttribute("src", "./images/white.png")
+    document.getElementById("computer").setAttribute("src", "./images/white.png")
+
+    document.getElementById("player-choice-name").innerHTML = ""
+    document.getElementById("computer-choice-name").innerHTML = ""
+
+    resultElement.innerHTML = ""
+}
+
+function removeClassFromButtons() {
+    rockButton.classList.remove("selected-button")
+    paperButton.classList.remove("selected-button")
+    scissorsButton.classList.remove("selected-button")
 }
