@@ -42,6 +42,8 @@ let playAgainButton = document.getElementById("play-again-button")
 playAgainButton.disabled = true
 playAgainButton.onclick = handlePlayAgainButton
 
+window.setInterval(changeWaitingText, 1500)
+
 function getComputerChoice() {
     let rand = Math.floor(Math.random() * 3)
 
@@ -97,14 +99,16 @@ function handleConfirmButtonClick() {
 
 function result(playerChoice, computerChoice) {
     if(playerChoice.name === computerChoice.name) {
-        resultElement.innerHTML = "It's a tie..."
+        resultElement.innerHTML = "It's a tie, better try again..."
     } else if(playerChoice.name === rock.name && computerChoice.name === scissors.name ||
         playerChoice.name === scissors.name && computerChoice.name === paper.name ||
         playerChoice.name === paper.name && computerChoice.name === rock.name) {
-            resultElement.innerHTML = "You've won!"
+            resultElement.innerHTML = `You've won!
+            Congratulations!`
             playerScore++
     } else {
-        resultElement.innerHTML = "You've lost :("
+        resultElement.innerHTML = `You've lost :(
+        Bummer...`
         computerScore++
     }
 
@@ -130,4 +134,12 @@ function removeClassFromButtons() {
     rockButton.classList.remove("selected-button")
     paperButton.classList.remove("selected-button")
     scissorsButton.classList.remove("selected-button")
+}
+
+function changeWaitingText() {
+    if(resultElement.innerHTML.length === 24) {
+        resultElement.innerHTML = resultElement.innerHTML.slice(0, 22)
+    } else if(resultElement.innerHTML.length === 22 || resultElement.innerHTML.length === 23) {
+        resultElement.innerHTML = resultElement.innerHTML + "."
+    }
 }
