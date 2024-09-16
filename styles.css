@@ -130,7 +130,7 @@ body {
 .selection img {
     border: 1px solid black;
     width: 7vw;
-    height: auto;
+    height: 7vw;
 }
 
 #vs {
@@ -175,9 +175,14 @@ body {
     align-items: center;
     gap: 50px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.7vw;
+    font-size: 1.5vw;
 }
 
 a {
     text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: grey;
 }

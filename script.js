@@ -31,7 +31,8 @@ let playerScore = 0
 let computerScore = 0
 
 let resultElement = document.getElementById("result")
-result.innerHTML = ""
+let playerSelectionName = document.getElementById("player-choice-name")
+let computerSelectionName = document.getElementById("computer-choice-name")
 let playerScoreElement = document.getElementById("player-score")
 let computerScoreElement = document.getElementById("computer-score")
 playerScoreElement.innerHTML = playerScore
@@ -119,10 +120,10 @@ function handlePlayAgainButton() {
     document.getElementById("player").setAttribute("src", "./images/white.png")
     document.getElementById("computer").setAttribute("src", "./images/white.png")
 
-    document.getElementById("player-choice-name").innerHTML = ""
-    document.getElementById("computer-choice-name").innerHTML = ""
+    document.getElementById("player-choice-name").innerHTML = "None"
+    document.getElementById("computer-choice-name").innerHTML = "None"
 
-    resultElement.innerHTML = ""
+    resultElement.innerHTML = "Waiting for selection..."
 }
 
 function removeClassFromButtons() {
