@@ -26,6 +26,7 @@ scissorsButton.onclick = () => {
 
 let confirmButton = document.getElementById("confirm-button")
 confirmButton.onclick = handleConfirmButtonClick
+confirmButton.disabled = true
 
 let playerScore = 0
 let computerScore = 0
@@ -69,13 +70,12 @@ function getPlayerChoice() {
             case "scissors-button":
                 return scissors
         }
-    } else {
-        alert("Select one option")
     }
 }
 
 function handleChoiceButtonClick(button) {
     removeClassFromButtons()
+    confirmButton.disabled = false
 
     button.classList.add("selected-button")
 }
@@ -103,22 +103,31 @@ function result(playerChoice, computerChoice) {
     } else if(playerChoice.name === rock.name && computerChoice.name === scissors.name ||
         playerChoice.name === scissors.name && computerChoice.name === paper.name ||
         playerChoice.name === paper.name && computerChoice.name === rock.name) {
-            resultElement.innerHTML = `You've won!
-            Congratulations!`
             playerScore++
+            if(playerScore === 5) {
+                resultElement.innerHTML = `You've won!
+                Congratulations!`
+                playAgainButton.textContent = "Play again"
+            } else {
+                resultElement.innerHTML = `${playerChoice.name} beats ${computerChoice.name}`
+            }
     } else {
-        resultElement.innerHTML = `You've lost :(
-        Bummer...`
         computerScore++
+        if(computerScore === 5) {
+            resultElement.innerHTML = `You've lost :(
+            Bummer...`
+            playAgainButton.textContent = "Play again"
+        } else {
+            resultElement.innerHTML = `${computerChoice.name} beats ${playerChoice.name}`
+        }
     }
 
-    playerScoreElement.innerHTML = playerScore
-    computerScoreElement.innerHTML = computerScore
+    updateScore()
 }
 
 function handlePlayAgainButton() {
     removeClassFromButtons()
-    rockButton.disabled = paperButton.disabled = scissorsButton.disabled = confirmButton.disabled = false
+    rockButton.disabled = paperButton.disabled = scissorsButton.disabled = false
     playAgainButton.disabled = true
 
     document.getElementById("player").setAttribute("src", "./images/white.png")
@@ -128,6 +137,13 @@ function handlePlayAgainButton() {
     document.getElementById("computer-choice-name").innerHTML = "None"
 
     resultElement.innerHTML = "Waiting for selection..."
+
+    if(playerScore === 5 || computerScore === 5) {
+        playerScore = 0
+        computerScore = 0
+        updateScore()
+        playAgainButton.textContent = "Next round"
+    }
 }
 
 function removeClassFromButtons() {
@@ -142,4 +158,9 @@ function changeWaitingText() {
     } else if(resultElement.innerHTML.length === 22 || resultElement.innerHTML.length === 23) {
         resultElement.innerHTML = resultElement.innerHTML + "."
     }
+}
+
+function updateScore() {
+    playerScoreElement.innerHTML = playerScore
+    computerScoreElement.innerHTML = computerScore
 }
