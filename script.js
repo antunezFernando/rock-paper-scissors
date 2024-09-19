@@ -24,10 +24,6 @@ scissorsButton.onclick = () => {
     handleChoiceButtonClick(scissorsButton)
 }
 
-let confirmButton = document.getElementById("confirm-button")
-confirmButton.onclick = handleConfirmButtonClick
-confirmButton.disabled = true
-
 let playerScore = 0
 let computerScore = 0
 
@@ -58,34 +54,21 @@ function getComputerChoice() {
     }
 }
 
-function getPlayerChoice() {
-    let choice = document.getElementsByClassName("selected-button")[0]
-    if(choice !== null && choice !== undefined) {
-        let choiceId = choice.getAttribute("id")
-        switch(choiceId) {
-            case "rock-button":
-                return rock
-            case "paper-button":
-                return paper
-            case "scissors-button":
-                return scissors
-        }
+function getPlayerChoice(button) {
+    switch(button.getAttribute("id")) {
+        case "rock-button":
+            return rock
+        case "paper-button":
+            return paper
+        case "scissors-button":
+            return scissors
     }
 }
 
 function handleChoiceButtonClick(button) {
-    removeClassFromButtons()
-    confirmButton.disabled = false
-
-    button.classList.add("selected-button")
-}
-
-function handleConfirmButtonClick() {
-    let playerChoice = getPlayerChoice()
+    let playerChoice = getPlayerChoice(button)
     if(playerChoice !== undefined) {
         let computerChoice = getComputerChoice()
-        rockButton.disabled = paperButton.disabled = scissorsButton.disabled = confirmButton.disabled = true
-        playAgainButton.disabled = false
 
         document.getElementById("player").setAttribute("src", playerChoice.imagePath)
         document.getElementById("computer").setAttribute("src", computerChoice.imagePath)
@@ -107,7 +90,8 @@ function result(playerChoice, computerChoice) {
             if(playerScore === 5) {
                 resultElement.innerHTML = `You've won!
                 Congratulations!`
-                playAgainButton.textContent = "Play again"
+                rockButton.disabled = paperButton.disabled = scissorsButton.disabled = true
+                playAgainButton.disabled = false
             } else {
                 resultElement.innerHTML = `${playerChoice.name} beats ${computerChoice.name}`
             }
@@ -116,7 +100,8 @@ function result(playerChoice, computerChoice) {
         if(computerScore === 5) {
             resultElement.innerHTML = `You've lost :(
             Bummer...`
-            playAgainButton.textContent = "Play again"
+            rockButton.disabled = paperButton.disabled = scissorsButton.disabled = true
+            playAgainButton.disabled = false
         } else {
             resultElement.innerHTML = `${computerChoice.name} beats ${playerChoice.name}`
         }
@@ -126,7 +111,6 @@ function result(playerChoice, computerChoice) {
 }
 
 function handlePlayAgainButton() {
-    removeClassFromButtons()
     rockButton.disabled = paperButton.disabled = scissorsButton.disabled = false
     playAgainButton.disabled = true
 
@@ -142,14 +126,7 @@ function handlePlayAgainButton() {
         playerScore = 0
         computerScore = 0
         updateScore()
-        playAgainButton.textContent = "Next round"
     }
-}
-
-function removeClassFromButtons() {
-    rockButton.classList.remove("selected-button")
-    paperButton.classList.remove("selected-button")
-    scissorsButton.classList.remove("selected-button")
 }
 
 function changeWaitingText() {
